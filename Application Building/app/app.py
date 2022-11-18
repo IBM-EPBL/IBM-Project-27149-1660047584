@@ -3,24 +3,18 @@ import os
 from PIL import Image
 from flask import Flask, request, render_template, url_for
 from werkzeug.utils import secure_filename, redirect
-#from gevent.pywsgi import WSGIServer
+from gevent.pywsgi import WSGIServer
 from keras.models import load_model
 from keras.preprocessing import image
 from flask import send_from_directory
 
-UPLOAD_FOLDER = 'D:/IBM Project/IBM-Project-50222-1660900453/Project_Development_Phase/Sprint_3'
-
+UPLOAD_FOLDER = r'C:\Users\ELCOT\Documents\GitHub\IBM-Project-27149-1660047584\Final Deliverables\Final code\app'
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-
-model = load_model("./models/mnistCNN.h5")
-
-
+model = load_model("mnistCNN.h5")
 @app.route('/')
 def index():
     return render_template('index.html')
-
-
 @app.route('/predict', methods=['GET', 'POST'])
 def upload():
     if request.method == "POST":
